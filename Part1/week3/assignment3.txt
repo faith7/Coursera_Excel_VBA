@@ -1,0 +1,42 @@
+Option Explicit
+
+Sub AddNumbersA()
+'Place your code here
+On Error GoTo Here
+Range("G15") = Range("D4") + InputBox("please input a number")
+Exit Sub
+Here:
+MsgBox "there is an error"
+End Sub
+
+
+Sub AddNumbersB()
+'Place your code here
+On Error GoTo Here
+ActiveCell.Offset(-2, 2) = ActiveCell + InputBox("Please input a number")
+Exit Sub
+Here:
+MsgBox "there is an error"
+End Sub
+
+
+Sub WherePutMe()
+'Place your code here
+Dim x As String, y As String
+    On Error GoTo Here
+    y = InputBox("please input the row number")
+    x = InputBox("please input the column letter")
+    Selection.Cells(2, 2) = Range(x & y)
+Exit Sub
+Here:
+MsgBox "there is an error"
+End Sub
+
+
+Sub Swap()
+'Place your code here
+Dim x As Double
+x = Selection.Cells(1, 1)
+Selection.Cells(1, 1) = Selection(1, 2)
+Selection.Cells(1, 2) = x
+End Sub
