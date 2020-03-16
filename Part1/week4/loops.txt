@@ -1,0 +1,34 @@
+Option Explicit
+Sub guess()
+Dim n As Integer, g As Integer
+n = WorksheetFunction.RandBetween(1, 10)
+Do
+    g = InputBox("I am thinking of a number between 1 to 10")
+    If g = n Then Exit Do
+    MsgBox ("Guess again!!!!")
+Loop
+ MsgBox ("You guessed correctly!")
+End Sub
+
+Sub doWhile()
+Dim i As Integer, maxnum As Integer
+maxnum = 25
+i = 4
+Do While i < maxnum
+    i = i + 1
+Loop
+MsgBox "Your maxium number is " & i
+
+End Sub
+
+
+Sub doUntil()
+Dim i As Integer, maxnum As Integer
+maxnum = 25
+i = 4
+Do
+    i = i + 1
+Loop Until i >= maxnum
+MsgBox "Your maxium number is " & i
+
+End Sub

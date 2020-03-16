@@ -1,0 +1,33 @@
+Option Explicit
+
+Sub deleteNegative()
+Dim lastRow As Integer, lastColumn As Integer, i As Integer, j As Integer
+lastRow = Selection.Rows.count
+lastColumn = Selection.Columns.count
+
+For i = 1 To lastRow
+ For j = 1 To lastColumn
+    If Selection.Cells(i, j).Value < 0 Then
+      Selection.Cells(i, j).Value = ""
+    End If
+ Next j
+Next i
+
+End Sub
+
+Sub BubbleSort()
+Dim countRow As Integer, i As Integer, j As Integer
+Dim temp As Double
+
+countRow = Selection.Rows.count
+For i = 2 To countRow
+ For j = 2 To countRow
+   If Selection.Cells(j - 1, 1) > Selection.Cells(j, 1) Then
+       temp = Selection.Cells(j - 1, 1)
+       Selection.Cells(j - 1, 1) = Selection.Cells(j, 1)
+       Selection.Cells(j, 1) = temp
+    End If
+  Next j
+Next i
+   
+End Sub

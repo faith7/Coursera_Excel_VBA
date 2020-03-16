@@ -1,0 +1,36 @@
+Option Explicit
+
+Sub guessGame()
+Dim n As Integer, g As Variant
+On Error GoTo Here:
+
+n = WorksheetFunction.RandBetween(1, 10)
+Do
+    Do
+        g = Application.InputBox("I am thinking of a number between 1 and 10", , , , , , 3)
+        If g = False Then Exit Sub
+        If IsNumeric(g) Then
+            If g <= 10 And g >= 0 And CInt(g) = g Then
+                Exit Do
+            ElseIf g > 10 Then
+                MsgBox "Guess must not exceed 10. Try again!"
+            ElseIf g < 1 Then
+                MsgBox "Guess must not less than 1. Try again!"
+            ElseIf CInt(g) <> g Then
+                MsgBox "Guess must be an integer! Try again!"
+            End If
+        ElseIf g = "" Then
+            MsgBox "You have not entered anything! Try again!"
+        Else
+           MsgBox "Your guess must be a number! Try again!"
+        End If
+    Loop
+
+If g = n Then Exit Do
+MsgBox ("Guess again!")
+Loop
+MsgBox ("Congratulations! You guessed the number!!!")
+Exit Sub
+Here:
+MsgBox "An error has occured!"
+End Sub
