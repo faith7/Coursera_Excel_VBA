@@ -1,0 +1,34 @@
+Option Explicit
+Sub addFive()
+Dim i As Integer, j As Integer
+Dim r As Integer, c As Integer
+
+r = Selection.Rows.Count
+c = Selection.Columns.Count
+
+For i = 1 To r
+ For j = 1 To c
+  Selection.Cells(i, j) = Selection.Cells(i, j) + 5
+ Next j
+Next i
+
+End Sub
+
+
+Sub addFiveOffset()
+Dim i As Integer, j As Integer
+Dim r As Integer, c As Integer
+
+r = Selection.Rows.Count
+c = Selection.Columns.Count
+
+For i = 1 To r
+ For j = 1 To c
+   ActiveCell.Offset(r + i, j - 1) = Selection.Cells(i, j) + 5
+ Next j
+Next i
+
+End Sub
+
+
+

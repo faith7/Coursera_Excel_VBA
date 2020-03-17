@@ -1,0 +1,38 @@
+Option Explicit
+Option Base 1
+
+Sub countDividedbyN()
+Dim i As Integer, j As Integer, n As Integer
+Dim r As Integer, c As Integer, count As Integer
+
+r = Selection.Rows.count
+c = Selection.Columns.count
+n = InputBox("Please enter an integer")
+
+For i = 1 To r
+    For j = 1 To c
+        If Selection.Cells(i, j) Mod n = 0 Then
+         count = count + 1
+    End If
+    Next j
+Next i
+MsgBox ("There were " & count & " item(s) divisible by " & n & ".")
+End Sub
+
+Function countDividedbyN2(rng As Range, n As Integer) As Integer
+Dim i As Integer, j As Integer
+Dim r As Integer, c As Integer, count As Integer
+ 
+r = rng.Rows.count
+c = rng.Columns.count
+
+For i = 1 To r
+    For j = 1 To c
+        If rng.Cells(i, j) Mod n = 0 Then
+         count = count + 1
+        End If
+    Next j
+Next i
+countDividedbyN2 = count
+End Function
+
