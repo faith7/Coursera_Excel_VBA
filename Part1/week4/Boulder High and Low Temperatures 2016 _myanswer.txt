@@ -1,0 +1,54 @@
+Option Explicit
+
+Sub high()
+Call clear
+
+Dim countRow As Integer, i As Integer, num As Integer, c As Integer
+countRow = Range("a1").CurrentRegion.Rows.Count
+num = Application.InputBox("Please type your choice of minimum high temperature." & vbCrLf & _
+                "Display the date and temperature that were above the following temperature.", , , , , , , 3)
+                
+If num = False Then Exit Sub
+For i = 2 To countRow
+    If Range("D" & i) > num Then
+       c = c + 1
+       Range("G" & 1) = "Date"
+       Range("H" & 1) = "Temperature"
+       Range("G" & c) = Range("B" & i) & "/" & Range("C" & i) & "/" & Range("A" & i)
+       Range("H" & c) = Range("D" & i)
+    End If
+Next i
+End Sub
+
+Sub low()
+
+Call clear
+
+Dim countRow As Integer, i As Integer, LT As Integer, c As Integer
+Range("A1").Select
+countRow = Selection.CurrentRegion.Rows.Count
+LT = Application.InputBox("Please type your choice of minimum low temperature. " & vbCrLf & _
+              "Display the date and temperature that were below the following temperature.", , , , , , , 3)
+
+
+If LT = False Then Exit Sub
+For i = 2 To countRow
+    If Selection.Cells(i, 5) < LT Then
+       c = c + 1
+       If c = 1 Then
+        Range("G" & 1) = "Date"
+        Range("H" & 1) = "Temperature"
+       Else
+         Range("G" & c) = Selection.Cells(i, 2) & "/" & Selection.Cells(i, 3) & "/" & Selection.Cells(i, 1)
+         Range("H" & c) = Selection.Cells(i, 5)
+       End If
+    End If
+Next i
+
+End Sub
+
+Sub clear()
+
+Columns("g:h").clear
+
+End Sub
