@@ -1,0 +1,41 @@
+Option Explicit
+Function kth(rng As Range, k)
+Dim i As Integer, j As Integer, n As Integer
+Dim temp As Integer, A()
+
+n = rng.Rows.Count
+ReDim A(n, 1)
+A = rng
+For i = 2 To n
+    For j = 2 To n
+      If A(j - 1, 1) > A(j, 1) Then
+         temp = A(j, 1)
+         A(j, 1) = A(j - 1, 1)
+         A(j - 1, 1) = temp
+      End If
+    Next j
+Next i
+kth = A(k, 1)
+End Function
+
+Function sortVector(rng As Range)
+
+Dim i As Integer, j As Integer, n As Integer
+Dim temp As Integer, A()
+n = rng.Rows.Count
+ 
+ReDim A(n, 1)
+A() = rng
+
+For i = 2 To n
+    For j = 2 To n
+        If A(j - 1, 1) > A(j, 1) Then
+            temp = A(j, 1)
+            A(j, 1) = A(j - 1, 1)
+            A(j - 1, 1) = temp
+        End If
+    Next j
+Next i
+sortVector = A
+End Function
+
