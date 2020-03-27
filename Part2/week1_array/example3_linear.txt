@@ -1,0 +1,30 @@
+Option Explicit
+
+Function linear(rng As Range)
+
+Dim i As Integer, n As Integer, data()
+Dim x() As Double, y() As Double, yp() As Double
+Dim m As Double, b As Double, e() As Double
+
+data = rng
+n = rng.Rows.Count
+
+ReDim x(n, 1) As Double, y(n, 1) As Double
+ReDim yp(n, 1) As Double, e(n, 1) As Double
+
+For i = 1 To n
+    x(i, 1) = data(i, 1)
+    y(i, 1) = data(i, 2)
+Next i
+
+m = WorksheetFunction.Slope(y, x)
+b = WorksheetFunction.Intercept(y, x)
+
+For i = 1 To n
+    yp(i, 1) = m * x(i, 1) + b
+    e(i, 1) = yp(i, 1) - y(i, 1)
+Next i
+
+linear = e
+End Function
+ 

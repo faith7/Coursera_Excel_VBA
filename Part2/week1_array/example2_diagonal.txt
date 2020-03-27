@@ -1,0 +1,16 @@
+Option Explicit
+Option Base 1
+Function diagonals(rng As Range)
+Dim i As Integer, n As Integer
+Dim D()
+n = rng.Rows.Count
+ReDim D(n, 1)
+
+For i = 1 To n
+    D(i, 1) = rng.Cells(i, i)
+Next i
+
+diagonals = D
+
+End Function
+
