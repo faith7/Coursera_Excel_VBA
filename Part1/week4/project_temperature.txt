@@ -7,7 +7,7 @@ Dim countRow As Integer, i As Integer, num As Integer, c As Integer
 countRow = Range("a1").CurrentRegion.Rows.Count
 num = Application.InputBox("Please type your choice of minimum high temperature." & vbCrLf & _
                 "Display the date and temperature that were above the following temperature.", , , , , , , 3)
-                
+c = 1
 If num = False Then Exit Sub
 For i = 2 To countRow
     If Range("D" & i) > num Then
@@ -30,7 +30,7 @@ countRow = Selection.CurrentRegion.Rows.Count
 LT = Application.InputBox("Please type your choice of minimum low temperature. " & vbCrLf & _
               "Display the date and temperature that were below the following temperature.", , , , , , , 3)
 
-
+c = 1
 If LT = False Then Exit Sub
 For i = 2 To countRow
     If Selection.Cells(i, 5) < LT Then
