@@ -1,0 +1,16 @@
+Option Explicit
+Option Base 1
+
+Sub Shopping()
+Dim i As Integer, ans As Integer, L() As Variant
+Do
+  ans = MsgBox("Would you like to add an item to the shopping list?", vbYesNo)
+  If ans = 7 Then Exit Do
+  i = i + 1
+  ReDim Preserve L(i) As Variant
+  L(i) = InputBox("Enter a new item: ")
+Loop
+Range("a1:a" & i) = WorksheetFunction.Transpose(L)
+
+End Sub
+
