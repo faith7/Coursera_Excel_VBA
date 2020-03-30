@@ -1,0 +1,38 @@
+Option Explicit
+Option Base 1
+' This code is from
+' https://stackoverflow.com/questions/57701021/excel-vba-array-function-that-will-shift-a-vector-up
+
+Function ShiftVector(rng As Range, n As Integer)
+Dim nr As Integer
+Dim i As Integer
+Dim head() As Variant
+Dim tail() As Variant
+Dim shift() As Variant
+
+nr = rng.Rows.Count
+ReDim head(n)
+
+For i = 1 To n
+    head(i) = rng(i).Value
+Next i
+
+ReDim tail(nr - n)
+
+For i = 1 To nr - n
+    tail(i) = rng(n + i).Value
+Next i
+
+ReDim shift(nr)
+
+For i = 1 To nr - n
+    shift(i) = tail(i)
+Next i
+
+For i = (nr - n + 1) To nr
+    shift(i) = head(i - (nr - n))
+Next i
+
+ShiftVector = WorksheetFunction.Transpose(shift())
+
+End Function

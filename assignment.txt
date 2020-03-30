@@ -1,0 +1,3 @@
+https://stackoverflow.com/questions/57701021/excel-vba-array-function-that-will-shift-a-vector-up
+
+https://stackoverflow.com/questions/47479970/shuffle-an-array-so-no-item-remains-in-the-same-position
