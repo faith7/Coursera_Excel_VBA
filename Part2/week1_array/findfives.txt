@@ -1,0 +1,41 @@
+Option Explicit
+Sub findfives()
+Dim i As Integer, j As Integer, nr As Integer, nc As Integer
+Dim rowmarker() As Integer, colmarker() As Integer, k As Integer
+Dim userRange As Range
+
+nr = Selection.Rows.Count
+nc = Selection.Columns.Count
+
+For i = 1 To nr
+    For j = 1 To nc
+        If Selection.Cells(i, j) = 5 Then
+        k = k + 1
+        ReDim Preserve rowmarker(k)
+        ReDim Preserve colmarker(k)
+        rowmarker(k) = i
+        colmarker(k) = j
+        End If
+    Next j
+ Next i
+ 
+ If k <> 0 Then
+     MsgBox "Found at least one 5!"
+     Set userRange = Application.InputBox(prompt:="Select the range to put the result", _
+     Title:="Export Range", Type:=8)
+     
+     userRange.Select
+     ActiveCell = "Found 5s in the following cells"
+     ActiveCell.Offset(1, 0) = "Row Index"
+     ActiveCell.Offset(1, 1) = "Column Index"
+     
+     For i = 1 To k
+     ActiveCell.Offset(i + 1, 0) = rowmarker(i)
+     ActiveCell.Offset(i + 1, 1) = colmarker(i)
+     Next i
+     
+ Else
+    MsgBox "Sorry, we could not find 5!"
+ End If
+
+End Sub
