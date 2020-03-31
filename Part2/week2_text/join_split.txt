@@ -1,0 +1,23 @@
+Option Explicit
+
+Sub splitandjoin()
+Dim sen As String, a() As String, i As Integer
+sen = InputBox("Please enter a sentence. ")
+a = VBA.Split(sen, " ")
+For i = 0 To UBound(a)
+MsgBox a(i)
+Next i
+
+MsgBox VBA.Join(a)
+
+End Sub
+
+Sub combineColumn()
+Dim b As Object, msg As Variant, i As Integer, nr As Integer
+Set b = Selection
+nr = Selection.Rows.Count
+For i = 1 To nr
+    msg = msg + b(i)
+Next i
+MsgBox msg
+End Sub

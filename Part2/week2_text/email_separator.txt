@@ -1,0 +1,32 @@
+Option Explicit
+
+Function Email(s As Range) As String
+Dim rnglen As Integer
+Dim atloc As Integer
+Dim startloc As Integer, endloc As Integer, i As Integer
+rnglen = Len(s)
+atloc = InStr(s, "@")
+
+For i = atloc - 1 To 1 Step -1
+    If Mid(s, i, 1) = ":" Or Mid(s, i, 1) = "<" Or Mid(s, i, 1) = " " Then
+        startloc = i + 1
+        Exit For 'to save time by exiting continous looping
+    ' when email address is equal to the left form. (No change in the email address)
+    ElseIf i = 1 Then
+        startloc = 1
+    End If
+Next i
+
+For i = atloc + 1 To rnglen
+    If Mid(s, i, 1) = "]" Or Mid(s, i, 1) = ">" Then
+        endloc = i - 1
+        Exit For
+    ElseIf i = rnglen Then
+        endloc = rnglen
+    End If
+Next i
+
+     
+Email = Mid(s, startloc, endloc - startloc + 1)
+
+End Function
