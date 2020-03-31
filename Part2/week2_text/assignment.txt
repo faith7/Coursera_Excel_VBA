@@ -1,0 +1,51 @@
+Option Explicit
+Option Base 1
+
+Sub searching()
+Dim rc As Integer, cc As Integer
+Dim i As Integer, j As Integer, count As Integer
+Dim s() As Variant
+
+
+
+Dim str As String
+rc = Selection.Rows.count
+cc = Selection.Columns.count
+str = InputBox("Please type strings you want to look for")
+
+For i = 1 To rc
+  For j = 1 To cc
+     If findstr(str, Selection.Cells(i, j).Value) Then
+         count = count + 1
+         Range("E1") = "Strings found"
+         Range("F1") = "Row number"
+         Range("G1") = "Column number"
+         Range("E" & count + 1) = Selection.Cells(i, j)
+         Range("F" & count + 1) = i
+         Range("G" & count + 1) = j
+     End If
+    Next j
+Next i
+
+If count = 0 Then
+MsgBox "No " & str & " found in the selection"
+End If
+
+End Sub
+
+Function findstr(substr As String, totalstr As String) As Boolean
+Dim lsub As Integer, ltotal As Integer
+Dim i As Integer
+
+findstr = False
+lsub = Len(substr)
+ltotal = Len(totalstr)
+
+For i = 1 To ltotal - lsub + 1
+  If Mid(totalstr, i, lsub) = substr Then
+    findstr = True
+  End If
+Next i
+
+End Function
+
