@@ -1,0 +1,30 @@
+Option Explicit
+
+Sub writeFile()
+Dim s As String, saveFile As String
+
+s = InputBox("Please enter a string.")
+saveFile = Application.GetSaveAsFilename(filefilter:="text files(*.txt),*.txt")
+Open saveFile For Output As #1
+Write #1, s
+Close #1
+
+End Sub
+
+
+Sub writeFile2()
+Dim s As String, saveFile As String
+Dim i As Integer, nr As Integer
+
+nr = Selection.Rows.Count
+saveFile = Application.GetSaveAsFilename(filefilter:="text files(*.txt),*.txt")
+
+Open saveFile For Output As #1
+For i = 1 To nr
+    Write #1, Selection.Cells(i, 1)
+Next i
+
+Write #1, s
+Close #1
+
+End Sub

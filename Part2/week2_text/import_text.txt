@@ -1,0 +1,26 @@
+Option Explicit
+Option Base 1
+
+Sub importText()
+
+Dim fileName As String, s() As String
+Dim thiswb As Workbook, activewb As Workbook
+Dim nr As Integer, i As Integer
+Set thiswb = ThisWorkbook
+fileName = Application.GetOpenFilename(filefilter:="Text filter(*.txt), *.txt", _
+           Title:="Open file ", MultiSelect:=False)
+Workbooks.Open fileName
+Set activewb = ActiveWorkbook
+
+'counta to count the number of non-blank cells
+nr = WorksheetFunction.CountA(Columns("A:A"))
+ReDim s(nr) As String
+For i = 1 To nr
+    s(i) = Range("A" & i)
+Next i
+
+activewb.Close saveChanges:=False
+thiswb.Activate
+Range("A1:A" & nr) = WorksheetFunction.Transpose(s)
+
+End Sub
