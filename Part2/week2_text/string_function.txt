@@ -1,0 +1,20 @@
+Option Explicit
+Option Base 1
+
+Sub joining()
+Dim m(3) As String
+Dim joinedmsg As String, msg As String
+Dim i As Integer
+
+m(1) = "A B"
+m(2) = " CDE "
+m(3) = " FG "
+
+joinedmsg = VBA.join(m)
+For i = 1 To Len(joinedmsg)
+    If Not Mid(joinedmsg, i, 1) = " " Then
+        msg = msg + VBA.Mid(joinedmsg, i, 1)
+    End If
+Next i
+MsgBox "Your joined message without a space is " + msg
+End Sub

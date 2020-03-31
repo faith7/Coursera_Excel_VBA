@@ -1,0 +1,17 @@
+find - case sensitive
+search - case insensitive
+textjoin(" ", true)
+first argument of text join => deliminator
+second argument of text join => true vs false 
+(true : ignore empty cells / false : not ignore empty ccells) 
+
+left(str, find(",",str) - 1)
+right(str, len(str) - find(",", str) - 1)
+* -1 for space after , 
+
+vba
+- no find/search function in vba  => InStr
+- concatenate => "&" 
+- join 
+- split (opposite of join) 
+
