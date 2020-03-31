@@ -1,0 +1,6 @@
+---Ralphie Reactor Hourly output----
+
+Time:	14:00
+Temperature:	36.5
+ph:	5.42
+d02:	50.40%
