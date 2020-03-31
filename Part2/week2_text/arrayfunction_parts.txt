@@ -1,0 +1,18 @@
+Option Explicit
+Option Base 1
+
+Function parts(s As String) As Variant
+Dim L As Integer
+Dim firstdash As Integer, seconddash As Integer
+Dim P(3) As Variant
+L = Len(s)
+
+firstdash = InStr(1, s, "-")
+seconddash = InStr(firstdash + 1, s, "-")
+P(1) = Left(s, firstdash - 1)
+P(2) = Mid(s, firstdash + 1, seconddash - firstdash - 1)
+P(3) = Right(s, L - seconddash)
+
+parts = P
+
+End Function
