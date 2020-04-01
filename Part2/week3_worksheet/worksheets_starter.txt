@@ -1,0 +1,46 @@
+Option Explicit
+
+
+Sub place7()
+Dim w As Worksheet
+For Each w In Worksheets
+    w.Range("B2") = 7
+Next
+End Sub
+
+
+Sub place5()
+Dim i As Integer, n As Integer
+n = Worksheets.Count
+For i = 1 To n
+Worksheets(i).Range("B3") = 5
+Next i
+End Sub
+
+
+Sub place10()
+Dim i As Integer, n As Integer
+n = Worksheets.Count
+For i = 1 To n
+    If Left(Worksheets(i).Name, 1) = "D" Then
+      Worksheets(i).Range("b3") = 10
+    End If
+Next i
+End Sub
+Sub worksheettest()
+Sheets.Add after:=ActiveSheet
+'ActiveSheet.Name = "Data"
+Worksheets(1).Name = "Main"
+
+'longer version to copy and paste
+Sheets("Sheet6").Activate
+Range("c5").Select
+Selection.Copy
+Sheets("Sheet4").Activate
+Range("A3").PasteSpecial
+
+'shorter version
+Sheets("Sheet4").Range("A3") = Sheets("Sheet6").Range("c5")
+Sheets("Sheet2").Visible = False
+
+End Sub

@@ -1,0 +1,16 @@
+Worksheets.Count
+Worksheet(i).Name
+ActiveSheet.Name
+Sheets.Add After:=ActiveSheet
+
+Application.DisplayAlerts=etFalse
+Sheets("Sheet2").Delete
+* sheets include charts  vs worksheets only refers to sheets
+
+Sheets("Sheet3").Name ="Data"
+Sheets("Sheet2").Visible= False
+Sheets("Sheet2").Activate
+Worksheets(2).Activate
+Sheets(2).Activate
+
+when renaming the sheet, it does not change the active sheet
