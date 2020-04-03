@@ -1,0 +1,53 @@
+Sub consolidate_schedule()
+
+Dim i As Integer, j As Integer, k As Integer
+Dim w As Worksheet
+Dim c As Range
+Dim mx As Integer
+Dim nw As Integer, nr As Integer, nc As Integer
+Dim count As Integer
+Dim a() As Integer
+
+nr = 9
+nc = 5
+
+ReDim a(nr, nc) As Integer
+
+For Each w In Worksheets
+    For i = 1 To nr
+        For j = 1 To nc
+            If w.Range("B4:F12").Cells(i, j) = "X" Then
+                a(i, j) = a(i, j) + 1
+            End If
+        Next j
+    Next i
+Next
+Worksheets(1).Range("B4:F12") = a
+mx = WorksheetFunction.Max(a)
+For Each c In Worksheets(1).Range("B4:F12")
+    If c.Value = mx Then
+        With c.Interior
+            .Pattern = xlSolid
+            .PatternColorIndex = xlAutomatic
+            .Color = 5296274
+            .TintAndShade = 0
+            .PatternTintAndShade = 0
+        End With
+    Else
+        With c.Interior
+            .Pattern = xlNone
+            .TintAndShade = 0
+            .PatternTintAndShade = 0
+        End With
+    End If
+Next
+End Sub
+
+
+Sub reset()
+Dim c As Range
+
+For Each c In Worksheets(1).Range("B4:F12")
+    c.Clear
+Next
+End Sub
