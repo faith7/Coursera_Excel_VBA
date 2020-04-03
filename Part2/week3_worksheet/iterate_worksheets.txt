@@ -1,0 +1,20 @@
+Option Explicit
+Sub iteratews()
+Dim i As Integer, n As Integer, person As String
+Dim shname As String
+person = InputBox("What is your name?")
+n = InputBox("How many sheets do you need?")
+
+For i = 1 To n - 1
+Sheets.Add after:=ActiveSheet
+Next i
+
+For i = 1 To n
+shname = InputBox("What is the name of the sheet?")
+Worksheets(i).Name = shname
+Worksheets(i).Name = person
+Next i
+
+End Sub
+
+
