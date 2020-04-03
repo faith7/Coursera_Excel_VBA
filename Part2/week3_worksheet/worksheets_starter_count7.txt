@@ -1,0 +1,23 @@
+Sub count7()
+Dim nw As Integer, i As Integer, j As Integer, k As Integer
+Dim nc As Integer, nr As Integer
+Dim count As Integer
+
+nr = 6
+nc = 4
+nw = Worksheets.count
+
+For i = 2 To nw
+    For j = 1 To nr
+        For k = 1 To nc
+            If Range("C5:F10").Cells(j, k) = 7 Then
+                count = count + 1
+            End If
+        Next k
+    Next j
+Next i
+
+Worksheets(1).Range("C1") = "# of 7"
+Worksheets(1).Range("C2") = count
+
+End Sub

@@ -1,0 +1,12 @@
+Sub consolidatews()
+Dim a() As String, i As Integer, n As Integer
+n = Worksheets.Count
+ReDim a(n - 1) As String
+
+For i = 2 To n
+    a(i - 1) = Worksheets(i).Range("A1")
+Next i
+
+Worksheets(1).Range("A1:A" & n - 1) = WorksheetFunction.Transpose(a)
+
+End Sub
