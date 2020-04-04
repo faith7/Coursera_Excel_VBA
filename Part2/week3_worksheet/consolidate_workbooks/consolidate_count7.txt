@@ -1,0 +1,28 @@
+Sub consolidate_count7()
+
+Dim filenames() As Variant, nw As Integer
+Dim i As Integer, j As Integer, k As Integer, count As Integer
+Dim thwb As Workbook, awb As Workbook
+Set thwb = ThisWorkbook
+filenames = Application.GetOpenFilename _
+            (Filefilter:="Excel Filter (*.xlsx), *.xlsx", _
+             Title:="open excel file(s)", _
+             MultiSelect:=True)
+Application.ScreenUpdating = False
+nw = UBound(filenames)
+ReDim a(nw) As String
+For i = 1 To nw
+    Workbooks.Open filenames(i)
+    Set awb = ActiveWorkbook
+    For j = 1 To 6
+        For k = 1 To 4
+            If awb.Sheets("Sheet1").Range("C5:F10").Cells(j, k) = 7 Then
+                count = count + 1
+            End If
+        Next k
+    Next j
+    awb.Close savechanges:=False
+Next i
+thwb.Activate
+MsgBox count
+End Sub

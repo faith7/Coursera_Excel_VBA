@@ -1,0 +1,26 @@
+Option Explicit
+Option Base 1
+
+
+Sub importdata()
+Dim filenames() As Variant, nw As Integer
+Dim i As Integer, a() As String
+Dim thwb As Workbook, awb As Workbook
+Set thwb = ThisWorkbook
+filenames = Application.GetOpenFilename _
+            (Filefilter:="Excel Filter (*.xlsx), *.xlsx", Title:="open excel file(s)", _
+             MultiSelect:=True)
+Application.ScreenUpdating = False
+nw = UBound(filenames)
+ReDim a(nw) As String
+
+For i = 1 To nw
+    Workbooks.Open filenames(i)
+    Set awb = ActiveWorkbook
+    a(i) = awb.Sheets("sheet1").Range("a1")
+    awb.Close SaveChanges:=False
+Next i
+
+thwb.Activate
+thwb.Sheets("sheet1").Range("A3:A" & nw + 2) = WorksheetFunction.Transpose(a)
+End Sub
