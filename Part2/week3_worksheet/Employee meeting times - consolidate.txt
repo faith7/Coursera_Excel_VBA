@@ -1,3 +1,5 @@
+Option Explicit
+Option Base 1
 Sub consolidate_schedule()
 
 Dim i As Integer, j As Integer, k As Integer
@@ -13,7 +15,9 @@ nc = 5
 
 ReDim a(nr, nc) As Integer
 
+
 For Each w In Worksheets
+    If Not w.Name = "Summary" Then
     For i = 1 To nr
         For j = 1 To nc
             If w.Range("B4:F12").Cells(i, j) = "X" Then
@@ -21,6 +25,7 @@ For Each w In Worksheets
             End If
         Next j
     Next i
+    End If
 Next
 Worksheets(1).Range("B4:F12") = a
 mx = WorksheetFunction.Max(a)
@@ -42,7 +47,6 @@ For Each c In Worksheets(1).Range("B4:F12")
     End If
 Next
 End Sub
-
 
 Sub reset()
 Dim c As Range
