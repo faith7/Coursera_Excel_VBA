@@ -1,0 +1,6 @@
+workbooks.count
+workbooks(i).name
+activeworkbook.name
+workbooks(2).close savechanges:= True
+activeworkbook.close savechanges:= False
+workbooks.add

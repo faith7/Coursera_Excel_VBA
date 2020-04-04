@@ -1,0 +1,45 @@
+Option Explicit
+Option Base 1
+
+Sub openUserFiles()
+Dim filenames As Variant, i As Integer
+filenames = Application.GetOpenFilename _
+            (Filefilter:="Excel Filter (*.xlsx), *.xlsx" _
+            , Title:="Open Files(s)", MultiSelect:=True)
+For i = 1 To UBound(filenames)
+    Workbooks.Open filenames(i)
+Next i
+
+End Sub
+
+
+'opening all files in a directory
+Sub openall()
+Dim folder As String, filename As String
+folder = "C:\Users\g\Desktop\vba\Coursera_Excel_Vba\Part2\week3_worksheet\workbooks"
+'select the first excel file in the folder
+filename = Dir(folder & "\*.xlsx")
+
+Do
+    'open the specified file
+    Workbooks.Open folder & "\" & filename
+    'file name to set to the next excel file name
+    filename = Dir
+Loop Until filename = ""
+
+End Sub
+
+
+Sub openonly()
+Dim folder As String, filename As String
+folder = "C:\Users\g\Desktop\vba\Coursera_Excel_Vba\Part2\week3_worksheet\workbooks"
+filename = Dir(folder & "\*.xlsx")
+
+Do
+If Left(filename, 1) = "F" Then
+    Workbooks.Open folder & "\" & filename
+End If
+
+filename = Dir
+Loop Until filename = ""
+End Sub
