@@ -1,0 +1,28 @@
+Option Explicit
+Option Base 1
+Sub ImportData()
+'Place your code here
+Dim myrng As Range, myrngadd As String, filenames As Variant, nw As Integer, s As String
+Dim i As Integer, activewb As Workbook, thiswb As Workbook
+Set thiswb = ThisWorkbook
+
+filenames = Application.GetOpenFilename(filefilter:="text file(*.csv),.csv", Title:="Ralphie", MultiSelect:=True)
+'open the first file
+Workbooks.Open filenames(1)
+Set myrng = Application.InputBox(prompt:="Please select a range", default:="$B$3:$B$6", Type:=8)
+myrngadd = myrng.Address
+ActiveWorkbook.Close savechanges:=False
+Application.ScreenUpdating = False
+
+For i = 1 To UBound(filenames)
+    Workbooks.Open filenames(i)
+    Set activewb = ActiveWorkbook
+    thiswb.Worksheets("Data").Range("A" & i & ": D" & i) = WorksheetFunction.Transpose(activewb.Worksheets(1).Range(myrngadd))
+    activewb.Close savechanges:=False
+Next i
+End Sub
+
+Sub Reset()
+Cells.Clear
+End Sub
+
