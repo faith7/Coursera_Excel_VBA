@@ -1,0 +1,3 @@
+* if there's more than prompt option, msgbox return value should be save in the left.
+* input value vs return value
+* vbcrlf

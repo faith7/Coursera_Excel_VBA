@@ -1,0 +1,26 @@
+input box function vs input box
+
+1) input function 
+  - "" (cancel or ok) 
+  - you can set the default value
+   
+In the following line of VBA code, y has been Dim'med as Variant:
+y = InputBox("Enter number","Input",10)
+
+The return value for the cancel button in this case is FALSE.
+
+Incorrect. The return value for the cancel button using the input box function is "", 
+assuming that the variable that the input box writes to is a Variant (or String).
+
+2) input method (type) 
+- type # 3 => number or string
+- False=> cancel button
+- "" -> ok button =>did not input anything
+
+y = Application.InputBox(Prompt:="Enter number",Title:="Input",Type:=1)
+
+The return value for the cancel button in this case is FALSE.
+
+Correct 
+The return value for the cancel button using the input box method is FALSE 
+when y is Dim'med as Variant (or String or Boolean).
