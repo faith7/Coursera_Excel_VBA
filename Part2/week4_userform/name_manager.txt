@@ -1,0 +1,66 @@
+Option Explicit
+Sub RunForm()
+PopulateComboBox
+NameForm.Show
+End Sub
+
+Sub PopulateComboBox()
+'Place your code here!
+Dim nr As Integer, i As Integer
+nr = WorksheetFunction.CountA(Range("A:A"))
+For i = 1 To nr
+    NameForm.ComboBox1.AddItem Range("A" & i)
+Next i
+NameForm.ComboBox1.Text = Range("A1")
+End Sub
+
+Sub AddName()
+Dim nRows As Integer, i As Integer, pn As String
+'Input validation
+If NameForm.NewName = "" Then
+    MsgBox "Name field cannot be left blank!"
+    Exit Sub
+End If
+
+'Place your code here!
+nRows = WorksheetFunction.CountA(Range("A:A"))
+pn = InputBox("please input the phone number")
+Range("A" & nRows + 1) = NameForm.NewName
+Range("B" & nRows + 1) = pn
+NameForm.ComboBox1.AddItem NameForm.NewName
+NameForm.NewName = ""
+End Sub
+
+Sub DeleteItem()
+Dim Index As Integer, Ans As Integer, nr As Integer
+Ans = MsgBox("Are you sure you want to delete this record?!", 20)
+If Ans = 6 Then
+    
+    'Place your code here!
+    nr = WorksheetFunction.CountA(Range("A:A"))
+    Index = NameForm.ComboBox1.ListIndex
+    Rows(Index + 1 & ":" & Index + 1).Select
+    Selection.Delete Shift:=xlUp
+    NameForm.ComboBox1.RemoveItem Index
+    nr = WorksheetFunction.CountA(Range("A:A"))
+    Rows(nr + 1 & ":" & nr + 1).Select
+    Selection.Insert Shift:=xlDown, CopyOrigin:=xlFormatFromLeftOrAbove
+    'HINT: Whenever you delete an entire row, you'll want to
+    'add an entire row below all data; otherwise, the on-sheet
+    'button will move position on the sheet until it is deleted
+    
+End If
+Range("A1").Select
+NameForm.ComboBox1.Value = Range("A1")
+End Sub
+
+Sub UpdateNumber()
+Dim Ans As String, Index As Integer
+Ans = InputBox("What is " & NameForm.ComboBox1.Value & "'s new phone number?")
+If Ans <> "" Then 'Protects against empty input OR cancel button
+    
+    'Place your code here!
+    Index = NameForm.ComboBox1.ListIndex
+    Range("B" & Index + 1) = Ans
+End If
+End Sub

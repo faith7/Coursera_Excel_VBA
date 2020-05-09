@@ -1,0 +1,101 @@
+Option Explicit
+
+Private Sub AddButton_Click()
+AddName
+End Sub
+
+Private Sub UpdateButton_Click()
+UpdateNum
+End Sub
+
+Private Sub deleteButton_Click()
+DeleteItem
+End Sub
+
+
+Private Sub finishButton_Click()
+Unload formManager
+End Sub
+
+
+Option Explicit
+Sub StartForm()
+
+PopulateCombo
+formManager.Show
+
+End Sub
+
+Sub PopulateCombo()
+
+Dim nr As Integer, i As Integer
+
+'to check number of rows
+nr = WorksheetFunction.CountA(Range("A:A"))
+
+'fill the combo box
+For i = 1 To nr
+   formManager.combo.AddItem Range("A" & i)
+Next i
+
+'default combo box setting
+formManager.combo.Text = Range("A1")
+
+End Sub
+
+Sub AddName()
+
+Dim nr As Integer, i As Integer, pn As String
+
+'check if the input box is empty
+If formManager.inputName = "" Then
+    MsgBox "Name field is empty! Please enter a new name"
+    Exit Sub
+End If
+
+nr = WorksheetFunction.CountA(Range("A:A"))
+pn = InputBox("please enter the phone number")
+
+'populate the active sheet with input data
+Range("A" & nr + 1) = formManager.inputName
+Range("B" & nr + 1) = pn
+
+formManager.combo.AddItem formManager.inputName
+formManager.inputName = ""
+
+End Sub
+Sub UpdateNum()
+
+Dim phone As String, index As Integer
+phone = InputBox(" Update the Phone Number for" & formManager.combo.Value & "?")
+If phone <> "" Then
+    index = formManager.combo.ListIndex
+    Range("B" & index + 1) = phone
+End If
+End Sub
+
+Sub DeleteItem()
+
+Dim item As Integer, index As Integer, nr As Integer
+
+item = MsgBox("Do you want to delete the item?!", vbYesNo)
+If item = 6 Then
+    nr = WorksheetFunction.CountA(Range("A:A"))
+    index = formManager.combo.ListIndex
+    'combobox index starts from 0. (Add 1 to match with row number.)
+    Rows(index + 1 & ":" & index + 1).Select
+    Selection.Delete Shift:=xlUp
+    formManager.combo.RemoveItem index
+    
+    'add an entire row below data to keep the start button in position.
+    nr = WorksheetFunction.CountA(Range("A:A"))
+    Rows(nr + 1 & ":" & nr + 1).Select
+    Selection.Insert Shift:=xlDown
+Else
+ MsgBox "Please reselect the data to delete"
+ Exit Sub
+End If
+Range("A1").Select
+formManager.combo.Value = Range("A1")
+End Sub
+

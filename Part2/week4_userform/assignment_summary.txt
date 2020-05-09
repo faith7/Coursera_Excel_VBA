@@ -1,0 +1,5 @@
+combobox1.addName 
+form1.inputname
+worksheetfunction.counta(range("A:A"))
+combobox1.listindex
+combobox1.removeitem
